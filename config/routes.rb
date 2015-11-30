@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   get 'cocktail/:id' => 'welcome#show', as: :purchase
   get 'search_by_product/:product' => 'welcome#index', as: :search_by_product
 
+
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
@@ -62,6 +64,9 @@ Rails.application.routes.draw do
 
 
     resources :users, :products, :ingridients
+
+    match 'products/:name/:direction' => 'products#index', via: 'get', as: :order_products
+
     resources :cocktails do
       resources :ingridients
     end
