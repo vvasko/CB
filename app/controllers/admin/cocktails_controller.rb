@@ -9,7 +9,15 @@ class Admin::CocktailsController < Admin::SignedApplicationController
 
 
   def index
-    @cocktails= Cocktail.all
+    if params[:name].present?
+      if 'price' == params[:name]
+        @cocktails = Cocktail.all.sort {|a,b| a.price <=> b.price}
+      else
+        @cocktails = Cocktail.order("#{params[:name]} #{params[:direction]}").all
+      end
+    else
+      @cocktails= Cocktail.all
+    end
   end
 
   def new

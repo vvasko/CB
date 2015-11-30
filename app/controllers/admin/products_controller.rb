@@ -3,15 +3,11 @@ class Admin::ProductsController < Admin::SignedApplicationController
   before_filter :find_item, only: [:edit, :update, :destroy, :show]
 
   def index
-
     if params[:name].present?
-
       @products = Product.order("#{params[:name]} #{params[:direction]}").all
     else
-
       @products= Product.all
     end
-
   end
 
   def new
