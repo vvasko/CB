@@ -11,10 +11,10 @@ class Admin::CocktailsController < Admin::SignedApplicationController
   def index
     if params[:name].present?
       if 'price' == params[:name]
-        @cocktails = Cocktail.all.sort_by{ |a| a.price } if 'asc' == params[:direction]
-        @cocktails = Cocktail.all.sort_by{ |a| -a.price } if 'desc' == params[:direction]
+        @cocktails = Cocktail.all_with_includes.sort_by{ |a| a.price } if 'asc' == params[:direction]
+        @cocktails = Cocktail.all_with_includes.sort_by{ |a| -a.price } if 'desc' == params[:direction]
       else
-        @cocktails = Cocktail.order("#{params[:name]} #{params[:direction]}").all
+        @cocktails = Cocktail.order("#{params[:name]} #{params[:direction]}").all_with_includes
       end
     else
       @cocktails= Cocktail.all
