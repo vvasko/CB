@@ -4,13 +4,9 @@
     <data-source source="LOCAL" name="Rails cocktailbar: development" uuid="d53c45b9-b307-4914-b632-abe7a76c4bd3">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
-      <imported>true</imported>
-      <remarks>$PROJECT_DIR$/config/database.yml</remarks>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:C:\Users\Vera\RubymineProjects\cocktailbar\db\development.sqlite3</jdbc-url>
-      <explain-plan-config>
-        <provider>com.intellij.database.plan.ExplainPlanProvider.NullExplainPlanProvider</provider>
-      </explain-plan-config>
+      <libraries />
     </data-source>
   </component>
 </project>

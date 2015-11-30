@@ -16,9 +16,19 @@
     <table class="table table-hover">
       <tr>
       <th>Id</th>
-      <th>Name</th>
+      <th>Name
+        <div class="sorting-wrapper">
+          <%= link_to '', admin_order_cocktails_path(:name, 'asc'), class: "sort-arrow asc-arrow" %>
+          <%= link_to '', admin_order_cocktails_path(:name, 'desc'), class: "sort-arrow dsc-arrow" %>
+        </div>
+      </th>
       <th>Value</th>
-      <th>Price</th>
+      <th>Price
+        <div class="sorting-wrapper">
+          <%= link_to '', admin_order_cocktails_path(:price, 'asc'), class: "sort-arrow asc-arrow" %>
+          <%= link_to '', admin_order_cocktails_path(:price, 'desc'), class: "sort-arrow dsc-arrow" %>
+        </div>
+      </th>
       <th></th>
       </tr>
       <% @cocktails.each do |cocktail| %>
