@@ -17,8 +17,18 @@
     <table class="table table-hover">
       <tr>
         <th>Id</th>
-        <th>Product</th>
-        <th>Cost Price</th>
+        <th>Product
+          <div class="sorting-wrapper">
+            <%= link_to '', admin_order_products_path(:name, 'asc'), class: "sort-arrow asc-arrow" %>
+            <%= link_to '', admin_order_products_path(:name, 'desc'), class: "sort-arrow dsc-arrow" %>
+          </div>
+        </th>
+        <th>Cost Price
+          <div class="sorting-wrapper">
+            <%= link_to '', admin_order_products_path(:cost_price, 'asc'), class: "sort-arrow asc-arrow" %>
+            <%= link_to '', admin_order_products_path(:cost_price, 'desc'), class: "sort-arrow dsc-arrow" %>
+          </div>
+        </th>
         <th>Min Value</th>
         <th>Price</th>
         <th>Type</th>

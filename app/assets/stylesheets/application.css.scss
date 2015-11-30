@@ -105,3 +105,31 @@ form {
   line-height: 50px;
 }
 
+.sorting-wrapper {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 0px 5px;
+}
+
+.sort-arrow {
+  display: block;
+  width: 0px;
+  height: 0px;
+  opacity: 0.8;
+  margin: 4px 0;
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.asc-arrow {
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid black;
+}
+
+.dsc-arrow {
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid black;
+}
