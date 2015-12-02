@@ -47,4 +47,10 @@ class Cocktail < ActiveRecord::Base
 
   end
 
+  def type
+    value < 150 ? 'short' : 'long'
+  end
+
+
+
 end

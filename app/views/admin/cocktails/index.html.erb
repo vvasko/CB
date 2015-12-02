@@ -29,6 +29,7 @@
           <%= link_to '', admin_order_cocktails_path(:price, 'desc'), class: "sort-arrow dsc-arrow" %>
         </div>
       </th>
+        <th>Type</th>
       <th></th>
       </tr>
       <% @cocktails.each do |cocktail| %>
@@ -37,6 +38,7 @@
         <td><%= link_to cocktail.name, admin_cocktail_path(cocktail) %></td>
         <td><%= cocktail.value %></td>
         <td><%= cocktail.price %></td>
+        <td><%= cocktail.type.capitalize %></td>
         <td>
           <div class="btn-group" role="group">
             <%= link_to 'edit', edit_admin_cocktail_path(cocktail) %>

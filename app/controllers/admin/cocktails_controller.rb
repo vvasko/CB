@@ -17,7 +17,7 @@ class Admin::CocktailsController < Admin::SignedApplicationController
         @cocktails = Cocktail.order("#{params[:name]} #{params[:direction]}").all_with_includes
       end
     else
-      @cocktails= Cocktail.all
+      @cocktails= Cocktail.all_with_includes
     end
   end
 
