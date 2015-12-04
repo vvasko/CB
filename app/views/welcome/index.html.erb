@@ -1,13 +1,4 @@
-<% cocktails_present = false
-   @cocktails.each do |type, cocktails|
-     if (cocktails.present?)
-       cocktails_present = true
-       break
-     end
-   end
-%>
-
-<%= page_header 'Cocktails', ' ' << (@cocktails.blank? || !cocktails_present ? 'are not available' : '') %>
+<%= render partial: 'header', locals: {cocktails: @cocktails} %>
 
 <% @cocktails.each do |type, cocktails| %>
     <%= render partial: 'group', locals: {cocktails: cocktails, type: type} %>
