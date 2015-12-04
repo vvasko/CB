@@ -7,24 +7,22 @@ class Admin::CocktailsController < Admin::SignedApplicationController
 
   INGRIDIENt_MAX_COUNT =5
 
-
   def index
     if params[:name].present?
       if 'price' == params[:name]
-        @cocktails = Cocktail.all_with_includes.sort_by{ |a| a.price } if 'asc' == params[:direction]
-        @cocktails = Cocktail.all_with_includes.sort_by{ |a| -a.price } if 'desc' == params[:direction]
+        @cocktails = Cocktail.all_with_includes.paginate(page: params[:page], per_page: 3)
+        @cocktails = @cocktails.sort_by{ |a| a.price } if 'asc' == params[:direction]
+        @cocktails = @cocktails.sort_by{ |a| -a.price } if 'desc' == params[:direction]
       else
-        @cocktails = Cocktail.order("#{params[:name]} #{params[:direction]}").all_with_includes
+        @cocktails = Cocktail.order("#{params[:name]} #{params[:direction]}").all_with_includes.paginate(page: params[:page], per_page: 3)
       end
     else
-      @cocktails= Cocktail.all_with_includes
+      @cocktails = Cocktail.all_with_includes.paginate(page: params[:page], per_page: 3)
     end
-    #@cocktails = @cocktails.paginate(page: params[:page], per_page: 3)
   end
 
   def new
     prepare_ingridient_items
-
   end
 
   def items_params

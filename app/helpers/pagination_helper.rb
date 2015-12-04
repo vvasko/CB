@@ -7,7 +7,7 @@ module PaginationHelper
     previous_page = get_previous_page
 
     if @pages_count > 1
-      "<nav>
+      "<nav class=\"text-right\">
           <ul class=\"pagination\">
             #{draw_paginate_button :text => '<span aria-hidden="true">&laquo;</span>'.html_safe, :page => previous_page[:page], :disabled => previous_page[:disabled]}
             #{draw_pages}
@@ -34,7 +34,7 @@ module PaginationHelper
 
   private
   def get_item_class args
-    item_class = args[:disabled] == true ? 'disabled' : ''
+    item_class = args[:disabled] ? 'disabled' : ''
     item_class += args[:class].blank? ? '' : ' ' + args[:class]
   end
 
@@ -67,7 +67,9 @@ module PaginationHelper
 
   private
   def pagination_init items
-    @pages_count = items.items_count / items.per_page + (items.items_count % items.per_page > 0 ? 1 : 0)
+    items_per_page = ActiveRecord::Base::per_page #TODO: change this
+    items_count = ActiveRecord::Base::items_count #TODO: change this
+    @pages_count = items_count / items_per_page + (items_count % items_per_page > 0 ? 1 : 0)
     @current_page = params[:page].present? ? params[:page].to_i : START_PAGE
   end
 end
