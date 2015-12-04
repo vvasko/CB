@@ -39,6 +39,9 @@ module ApplicationHelper
     "#{form_builder.label field_name, class: 'col-md-2 control-label'} <div class='col-md-2'> #{form_builder.select(method, choices, options, html_options)} </div>".html_safe
   end
 
+  def page_header (title, subtitle = '')
+    "<div class='page-header'><h1>#{title}<small>#{subtitle}</small></h1></div>".html_safe
+  end
 
 
 end

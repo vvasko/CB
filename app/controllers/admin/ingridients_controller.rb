@@ -1,18 +1,6 @@
 class Admin::IngridientsController < Admin::SignedApplicationController
   before_filter :find_item, only: [:edit, :update, :destroy]
 
-=begin
-  def new
-    @ingridient = Ingridient.new
-    unless Cocktail.find_by( params[:cocktail_id]).blank?
-      @ingridient.cocktail_id = params[:cocktail_id].to_i
-      redirect_to action: 'new'
-    else
-      Ingridient.errors.add(:cocktail_id, " cocktail not found")
-      redirect_to action: 'new'
-    end
-=end
-
   def new
     @ingridient = Ingridient.new
     cocktail= Cocktail.find_by(id: params[:cocktail_id])

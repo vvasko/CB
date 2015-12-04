@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
   resources :welcome, only: [:show]
   get 'cocktail/:id' => 'welcome#show', as: :purchase
-  get 'search_by_product/:product' => 'welcome#index', as: :search_by_product
+  get 'search_by_product(/:product)' => 'welcome#index', as: :search_by_product
 
 
 
@@ -64,12 +64,15 @@ Rails.application.routes.draw do
 
     resources :users, :products, :ingridients
 
-    match 'products/:name/:direction' => 'products#index', via: 'get', as: :order_products
-    match 'cocktails/:name/:direction' => 'cocktails#index', via: 'get', as: :order_cocktails
-
     resources :cocktails do
       resources :ingridients
     end
+
+    match 'products/:name/:direction' => 'products#index',  via: 'get', as: :order_products
+    match 'cocktails/:name/:direction' => 'cocktails#index', via: 'get', as: :order_cocktails
+
+
+
 
 
     #     # Directs /admin/products/* to Admin::ProductsController
