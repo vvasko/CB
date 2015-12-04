@@ -17,17 +17,11 @@
       <tr>
       <th>Id</th>
       <th>Name
-        <div class="sorting-wrapper">
-          <%= link_to '', admin_order_cocktails_path(:name, 'asc'), class: "sort-arrow asc-arrow" %>
-          <%= link_to '', admin_order_cocktails_path(:name, 'desc'), class: "sort-arrow dsc-arrow" %>
-        </div>
+        <%= get_sort_buttons(admin_order_cocktails_path(:name, 'asc'), admin_order_cocktails_path(:name, 'desc')) %>
       </th>
       <th>Value</th>
       <th>Price
-        <div class="sorting-wrapper">
-          <%= link_to '', admin_order_cocktails_path(:price, 'asc'), class: "sort-arrow asc-arrow" %>
-          <%= link_to '', admin_order_cocktails_path(:price, 'desc'), class: "sort-arrow dsc-arrow" %>
-        </div>
+        <%= get_sort_buttons(admin_order_cocktails_path(:price, 'asc'), admin_order_cocktails_path(:price, 'desc')) %>
       </th>
         <th>Type</th>
       <th></th>
@@ -48,5 +42,6 @@
       </tr>
           <% end %>
     </table>
+    <%= draw_pagination @cocktails %>
   </div>
 </div>

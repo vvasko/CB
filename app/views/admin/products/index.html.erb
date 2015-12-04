@@ -18,16 +18,10 @@
       <tr>
         <th>Id</th>
         <th>Product
-          <div class="sorting-wrapper">
-            <%= link_to '', admin_order_products_path(:name, 'asc'), class: "sort-arrow asc-arrow" %>
-            <%= link_to '', admin_order_products_path(:name, 'desc'), class: "sort-arrow dsc-arrow" %>
-          </div>
+          <%= get_sort_buttons(admin_order_products_path(:name, 'asc'), admin_order_products_path(:name, 'desc')) %>
         </th>
         <th>Cost Price
-          <div class="sorting-wrapper">
-            <%= link_to '', admin_order_products_path(:cost_price, 'asc'), class: "sort-arrow asc-arrow" %>
-            <%= link_to '', admin_order_products_path(:cost_price, 'desc'), class: "sort-arrow dsc-arrow" %>
-          </div>
+          <%= get_sort_buttons(admin_order_products_path(:cost_price, 'asc'), admin_order_products_path(:cost_price, 'desc')) %>
         </th>
         <th>Min Value</th>
         <th>Price</th>
@@ -50,7 +44,8 @@
             </td>
           </tr>
       <% end %>
-        </table>
+    </table>
+    <%= draw_pagination @products %>
     </div>
   </div>
 
