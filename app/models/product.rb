@@ -1,6 +1,5 @@
 class Product < ActiveRecord::Base
   mount_uploader :image, ProductImageUploader
-
   has_many :ingridients
   has_many :cocktails, through: :ingridients, dependent: :destroy
 

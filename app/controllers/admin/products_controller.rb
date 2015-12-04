@@ -6,8 +6,9 @@ class Admin::ProductsController < Admin::SignedApplicationController
     if params[:name].present?
       @products = Product.order("#{params[:name]} #{params[:direction]}").all
     else
-      @products= Product.all
+      @products = Product.all
     end
+    @products = @products.paginate(page: params[:page], per_page: 3)
   end
 
   def new

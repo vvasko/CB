@@ -19,6 +19,7 @@ class Admin::CocktailsController < Admin::SignedApplicationController
     else
       @cocktails= Cocktail.all
     end
+    #@cocktails = @cocktails.paginate(page: params[:page], per_page: 3)
   end
 
   def new
