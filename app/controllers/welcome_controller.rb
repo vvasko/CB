@@ -2,15 +2,14 @@ class WelcomeController < ApplicationController
   before_filter :find_item, only: [:show]
 
   def index
-    if params[:product].present?
-      @cocktails = Cocktail.all_with_includes_by_product params[:product]
-    else
-      @cocktails = Cocktail.all_with_includes
+    case
+      when params.has_key?(:search)
+        search_by_phrase
+      when params.has_key?(:product)
+        search_by_product
+      else
+        show_default
     end
-
-    @cocktails = filter_by :type
-    @cocktails = @cocktails.group_by{ |c| c.type }
-
   end
 
   def show
@@ -26,9 +25,36 @@ class WelcomeController < ApplicationController
     if params[field].present?
       @cocktails = @cocktails.select { |v| v.send(field) == params[field] }
     end
-
     @cocktails
   end
 
+  def show_default
+    @cocktails = Cocktail.all_with_includes
+    group_and_filter_by :type
+  end
+
+
+  def search_by_phrase
+    @cocktails = {}
+    @cocktails["name containing '#{params[:search].to_s}'"] = Cocktail.search_by_name(params[:search]).all_with_includes
+    @cocktails["ingridient name containing '#{params[:search].to_s}'"] =
+        Cocktail.search_by_ingridients_name(params[:search]).all_with_includes
+
+  end
+
+  def search_by_product
+    if params[:product].present?
+      @cocktails = Cocktail.all_with_includes_by_product params[:product]
+    else
+      @cocktails = Cocktail.all_with_includes
+    end
+    group_and_filter_by :type
+
+  end
+
+  def group_and_filter_by field
+    @cocktails = filter_by field
+    @cocktails = @cocktails.group_by { |c| c.send(field) }
+  end
 
 end
