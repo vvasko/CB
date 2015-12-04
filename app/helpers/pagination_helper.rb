@@ -7,7 +7,7 @@ module PaginationHelper
     previous_page = get_previous_page
 
     if @pages_count > 1
-      "<nav class=\"text-right\">
+      "<nav class=\"text-center\">
           <ul class=\"pagination\">
             #{draw_paginate_button :text => '<span aria-hidden="true">&laquo;</span>'.html_safe, :page => previous_page[:page], :disabled => previous_page[:disabled]}
             #{draw_pages}
