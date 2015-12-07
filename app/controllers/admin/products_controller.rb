@@ -3,12 +3,13 @@ class Admin::ProductsController < Admin::SignedApplicationController
   before_filter :find_item, only: [:edit, :update, :destroy, :show]
 
   def index
+    @products = Product.all
+    @products_count = @products.size
+    @per_page = PAGINATION_PER_PAGE
+    @products = paginate(@products, params[:page], @per_page)
     if params[:name].present?
-      @products = Product.order("#{params[:name]} #{params[:direction]}").all
-    else
-      @products = Product.all
+      @products = @products.order("#{params[:name]} #{params[:direction]}")
     end
-    @products = @products.paginate(page: params[:page], per_page: 3)
   end
 
   def new
