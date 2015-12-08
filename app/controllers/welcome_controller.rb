@@ -53,8 +53,12 @@ class WelcomeController < ApplicationController
   end
 
   def group_and_filter_by field
-    @cocktails = filter_by field
-    @cocktails = @cocktails.group_by { |c| c.send(field) }
+   # if params[field].present?
+      @cocktails =  filter_by(field)
+    #else
+      @cocktails = @cocktails.group_by { |c| c.send(field) }
+    #end
+
   end
 
 end

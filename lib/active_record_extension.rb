@@ -17,7 +17,7 @@ module ActiveRecordExtension
     end
 
     def pagination_init args
-      @@items_count = self.all.count
+      @@items_count = self.all.size
       @@per_page = (args[:per_page].blank? ? @@items_count : args[:per_page].to_i) || PER_PAGE
     end
 

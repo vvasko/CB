@@ -1,8 +1,10 @@
 module PaginationHelper
   START_PAGE = 1
 
-  def draw_pagination items
-    pagination_init items
+  def draw_pagination(items_count, per_page)
+    @pages_count = items_count / per_page + (items_count % per_page > 0 ? 1 : 0)
+    @current_page = get_current_page
+
     next_page = get_next_page
     previous_page = get_previous_page
 
@@ -17,7 +19,16 @@ module PaginationHelper
     end
   end
 
-  private
+  protected
+  def get_current_page
+    if params[:page].present? && params[:page].to_i > 0
+       params[:page].to_i
+    else
+      START_PAGE
+    end
+  end
+
+  protected
   def draw_pages
     html = ''
     (1..@pages_count).each do |i|
@@ -26,19 +37,19 @@ module PaginationHelper
     html.html_safe
   end
 
-  private
+  protected
   def draw_paginate_button args
     item_class = get_item_class(:class => args[:class], :disabled => args[:disabled])
     "<li class=\"#{item_class}\">#{link_to args[:text], get_pagination_url(args[:page])}</li>".html_safe
   end
 
-  private
+  protected
   def get_item_class args
     item_class = args[:disabled] ? 'disabled' : ''
     item_class += args[:class].blank? ? '' : ' ' + args[:class]
   end
 
-  private
+  protected
   def get_next_page
     result = {:disabled => true, :page => ''}
     if @current_page < @pages_count
@@ -47,7 +58,7 @@ module PaginationHelper
     result
   end
 
-  private
+  protected
   def get_previous_page
     result = {:disabled => true, :page => ''}
     if @current_page > START_PAGE
@@ -56,20 +67,12 @@ module PaginationHelper
     result
   end
 
-  private
+  protected
   def get_pagination_url page
     result = '#'
     unless page.blank?
       result = params.merge(:page => page)
     end
     result
-  end
-
-  private
-  def pagination_init items
-    items_per_page = ActiveRecord::Base::per_page #TODO: change this
-    items_count = ActiveRecord::Base::items_count #TODO: change this
-    @pages_count = items_count / items_per_page + (items_count % items_per_page > 0 ? 1 : 0)
-    @current_page = params[:page].present? ? params[:page].to_i : START_PAGE
   end
 end
