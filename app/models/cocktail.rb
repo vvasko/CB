@@ -2,6 +2,9 @@ class Cocktail < ActiveRecord::Base
   mount_uploader :image, CocktailImageUploader
   has_many :ingridients, dependent: :destroy
   has_many :products, through: :ingridients
+  
+  has_many :order_cocktails
+
 
   before_save { self.name = name.titleize }
 
