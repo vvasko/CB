@@ -1,6 +1,6 @@
 class Workset < ActiveRecord::Base
-  has_one :table
-  has_one :waiter
+  belongs_to :table
+  belongs_to :waiter
 
   enum status: [ :open, :closed]
 end
