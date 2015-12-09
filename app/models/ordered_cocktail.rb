@@ -1,5 +1,5 @@
 class OrderedCocktail < ActiveRecord::Base
-  has_one :order
-  has_one :cocktail
+  belongs_to :order
+  belongs_to :cocktail
 
 end
