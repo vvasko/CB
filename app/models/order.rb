@@ -1,7 +1,7 @@
 class Order < ActiveRecord::Base
 
   has_many :ordered_cocktails
-  has_one :table
+  belongs_to :table
 
   enum status: [ :new, :delivered, :payed, :closed]
 end
