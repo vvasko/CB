@@ -1,1 +1,7 @@
-tables
+<div class="page-header">
+  <h1>Set Tables<small> for <%= @waiter.firstname %> <%= @waiter.lastname %> </small></h1>
+</div>
+
+<%= form_for [:admin, @waiter] do |f| %>
+    <%= render partial: 'tables_form', locals:{f: f} %>
+<% end %>

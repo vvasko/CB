@@ -2,18 +2,18 @@
 
 
   <div class="panel-body">
-    <%= form_field_text(f, :name) %>
-    <%#= form_field_text(f, :last_name) %>
+    <%= form_field_text(f, :firstname) %>
+    <%= form_field_text(f, :lastname) %>
   </div>
 
   <div class='field form-group'>
-    <%= f.label :image, class: 'col-md-2 control-label' %>
+    <%= f.label :photo, class: 'col-md-2 control-label' %>
     <div class='col-sm-3'>
-      <%= f.file_field :image, multiple: false %>
+      <%= f.file_field :photo, multiple: false %>
     </div>
   </div>
 
-  <% if @waiter.image? %>
+  <% if @waiter.photo? %>
       <div class='field form-group'>
         <div class='col-md-2 control-label'></div>
 

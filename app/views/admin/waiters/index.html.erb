@@ -26,21 +26,21 @@
         <th>Actions</th>
         <!--<th></th>-->
       </tr>
-      <!--<%# @cocktails.each do |cocktail| %>-->
-          <!--<tr>-->
-            <!--<td><%#= cocktail.id %></td>-->
+      <% @waiters.each do |waiter| %>
+          <tr>
+            <td><%= waiter.id %></td>
             <!--<td><%#= link_to cocktail.name, admin_cocktail_path(cocktail) %></td>-->
-            <!--<td><%#= cocktail.value %></td>-->
-            <!--<td><%#= cocktail.price %></td>-->
-            <!--<td><%#= cocktail.type.capitalize %></td>-->
-            <!--<td>-->
-              <!--<div class="btn-group" role="group">-->
-                <!--<%#= link_to 'edit', edit_admin_cocktail_path(cocktail) %>-->
-                <!--<%#= link_to 'remove', admin_cocktail_path(cocktail), method: :delete, data: {confirm: 'Are you sure?'} %>-->
-              <!--</div>-->
-            <!--</td>-->
-          <!--</tr>-->
-      <!--<%# end %>-->
+            <td><%= waiter.firstname %></td>
+            <td><%= waiter.lastname %></td>
+            <td><%= link_to @worksets.count, admin_waiter_path(waiter)%></td>
+            <td>
+              <div class="btn-group" role="group">
+                <%= link_to 'edit', edit_admin_waiter_path(waiter) %>
+                <%= link_to 'remove', admin_waiter_path(waiter), method: :delete, data: {confirm: 'Are you sure?'} %>
+              </div>
+            </td>
+          </tr>
+      <% end %>
     </table>
   </div>
 </div>
