@@ -64,7 +64,7 @@ Rails.application.routes.draw do
     match '/signout', to: 'sessions#destroy', via: 'delete'
     match '/signup', to: 'users#new', via: 'get'
 
-    resources :users, :products, :ingridients
+    resources :users, :products, :ingridients, :waiters
 
     resources :cocktails do
       resources :ingridients
