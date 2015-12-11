@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151125161424) do
+ActiveRecord::Schema.define(version: 20151209172102) do
 
   create_table "cocktails", force: :cascade do |t|
     t.string   "name"
@@ -29,6 +29,21 @@ ActiveRecord::Schema.define(version: 20151125161424) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "ordered_cocktails", force: :cascade do |t|
+    t.integer  "cocktail_id"
+    t.integer  "order_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer  "table_id"
+    t.integer  "status"
+    t.float    "sum"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "products", force: :cascade do |t|
     t.string   "name"
     t.float    "cost_price"
@@ -41,6 +56,13 @@ ActiveRecord::Schema.define(version: 20151125161424) do
 
   add_index "products", ["name"], name: "index_products_on_name"
 
+  create_table "tables", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
@@ -49,6 +71,24 @@ ActiveRecord::Schema.define(version: 20151125161424) do
     t.string   "remember_token"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+  end
+
+  create_table "waiters", force: :cascade do |t|
+    t.string   "firstname"
+    t.string   "lastname"
+    t.string   "photo"
+    t.integer  "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "worksets", force: :cascade do |t|
+    t.integer  "table_id"
+    t.integer  "waiter_id"
+    t.integer  "status"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.float    "total_earned"
   end
 
 end

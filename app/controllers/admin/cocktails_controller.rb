@@ -37,7 +37,6 @@ class Admin::CocktailsController < Admin::SignedApplicationController
     @cocktail = Cocktail.create items_params
     if @cocktail.errors.empty?
       flash[:success] = "Cocktail \'#{@cocktail.name.humanize}\' was created successfully"
-      # redirect_to @cocktail
       redirect_to action: :index
     else
       flash[:warning] = @cocktail.errors.full_messages.to_sentence
