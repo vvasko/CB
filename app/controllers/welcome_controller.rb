@@ -1,6 +1,8 @@
 class WelcomeController < ApplicationController
   before_filter :find_item, only: [:show]
 
+  before_action :verify_params!, only: [:add_to_cart]
+
   def index
     case
       when params.has_key?(:search)
@@ -14,6 +16,14 @@ class WelcomeController < ApplicationController
 
   def show
 
+  end
+
+  def add_to_cart
+    #check cocktail exists (verify_params)
+    current_table = 2 #TODO: get current table
+
+
+    render :index
   end
 
   private
@@ -53,12 +63,22 @@ class WelcomeController < ApplicationController
   end
 
   def group_and_filter_by field
-   # if params[field].present?
-      @cocktails =  filter_by(field)
+    # if params[field].present?
+    @cocktails = filter_by(field)
     #else
-      @cocktails = @cocktails.group_by { |c| c.send(field) }
+    @cocktails = @cocktails.group_by { |c| c.send(field) }
     #end
 
   end
+
+  def verify_params!
+    @cocktail_id = params[:id]
+    unless @cocktail_id.blank?
+      if Cocktail.find_by(id: @cocktail_id).blank?
+        redirect_to_back "Can not find cocktail with id #{@product_id}"
+      end
+    end
+  end
+
 
 end
