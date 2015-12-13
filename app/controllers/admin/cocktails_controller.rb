@@ -80,7 +80,6 @@ class Admin::CocktailsController < Admin::SignedApplicationController
   private
   def find_item
     @cocktail= Cocktail.find_with_includes params[:id]
-
   end
 
   def redirect_to_back error_message
@@ -104,7 +103,7 @@ class Admin::CocktailsController < Admin::SignedApplicationController
   end
 
   def before_new
-    @cocktail =Cocktail.new
+    @cocktail = Cocktail.new
     product_id = params[:product]
 
     if validate_product_id? product_id

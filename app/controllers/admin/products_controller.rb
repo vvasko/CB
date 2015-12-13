@@ -23,7 +23,6 @@ class Admin::ProductsController < Admin::SignedApplicationController
 
   def item_params
     params.require(:product).permit(:id, :name, :image, :remove_image, :cost_price, :min_value, :product_type)
-
   end
 
   def edit
