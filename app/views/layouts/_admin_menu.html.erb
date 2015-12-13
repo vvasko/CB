@@ -16,6 +16,7 @@
             <li> <%= link_to 'Products', admin_products_path %></li>
             <li> <%= link_to 'Cocktails', admin_cocktails_path %></li>
             <li> <%= link_to 'Tables', admin_tables_path %></li>
+            <li> <%= link_to 'Waiters', admin_waiters_path %></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><p class="navbar-text"> logged as <%= link_to current_user.name, admin_user_path(current_user) %></p></li>
@@ -23,8 +24,8 @@
           </ul>
       <% else %>
           <ul class="nav navbar-nav navbar-right">
-            <li><p class="navbar-text"><%= link_to 'Sign In', admin_signin_path, method: 'delete' %></p></li>
-            <li><p class="navbar-text"><%= link_to 'Sign Up', admin_signup_path, method: 'delete' %></p></li>
+            <li><p class="navbar-text"><%= link_to 'Sign In', admin_signin_path %></p></li>
+            <li><p class="navbar-text"><%= link_to 'Sign Up', admin_signup_path %></p></li>
           </ul>
       <% end %>
 
