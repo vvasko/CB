@@ -6,10 +6,10 @@ class Admin::ProductsController < Admin::SignedApplicationController
     @products = Product.all
     @products_count = @products.size
     @per_page = PAGINATION_PER_PAGE
-    @products = paginate(@products, params[:page], @per_page)
     if params[:name].present?
       @products = @products.order("#{params[:name]} #{params[:direction]}")
     end
+    @products = paginate(@products, params[:page], @per_page)
   end
 
   def new
