@@ -3,4 +3,5 @@
 </div>
 <%= form_for [:admin, @table]  do |f| %>
     <%= render partial: 'form', locals: {f: f} %>
+    <%= f.hidden_field(:status, :value => :free) %>
 <% end %>

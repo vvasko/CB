@@ -4,5 +4,13 @@ class Table < ActiveRecord::Base
 
   enum status: [:free, :occupied, :inactive, :waiting]
 
-  validates :name, presence: true
+  validates :name, :status, presence: true
+  before_destroy :check_status
+
+  def check_status
+    if ['occupied', 'waiting'].include? status
+      errors.add(:table_status, "is \"#{status}\". Table \"#{name}\" can not be deleted.")
+      return false
+    end
+  end
 end
