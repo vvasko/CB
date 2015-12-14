@@ -1,4 +1,5 @@
 class WelcomeController < ApplicationController
+
   before_filter :find_item, only: [:show]
 
   before_action :verify_params!, only: [:add_to_cart]
@@ -6,6 +7,7 @@ class WelcomeController < ApplicationController
   before_action :get_current_table, only: [:index]
 
   def index
+    puts "welcome controller"
     case
       when params.has_key?(:search)
         search_by_phrase
@@ -103,8 +105,11 @@ class WelcomeController < ApplicationController
   end
 
   def get_current_table
-    current_table = 2 #TODO: get current table
-    @currrent_table = current_table
-  end
+    # current_table = 2 #TODO: get current table
+    # @currrent_table = current_table
+    current_table_id= 4
+    @currrent_table = current_table_id
+    puts "currrent_table = #{@currrent_table}"
+   end
 
 end
