@@ -98,21 +98,7 @@ class WelcomeController < ApplicationController
   end
 
   def sum_to_pay
-    current_table = 2 #TODO: get current table
-    @sum = 0
-
-    cocktails =
-        Cocktail
-            .joins(:orders)
-            .includes(ordered_cocktails: [:order])
-            .where("`orders`.status = ? AND `orders`.table_id = ?", Order.statuses[:pending], current_table)
-            .all_with_includes
-
-    cocktails.each do |cocktail|
-      @sum += cocktail.price
-    end
-
-    @sum
+    @sum = Order.sum_to_pay
 
   end
 
