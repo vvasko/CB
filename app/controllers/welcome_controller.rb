@@ -2,6 +2,8 @@ class WelcomeController < ApplicationController
   before_filter :find_item, only: [:show]
 
   before_action :verify_params!, only: [:add_to_cart]
+  before_action :sum_to_pay, only: [:index]
+  before_action :get_current_table, only: [:index]
 
   def index
     case
@@ -20,11 +22,19 @@ class WelcomeController < ApplicationController
 
   def add_to_cart
     #check cocktail exists (verify_params)
-    current_table = 2 #TODO: get current table
-
-
-    render :index
+    Order.add_cocktail_to_order @cocktail_id
+    redirect_to action: 'index'
   end
+
+  def call_waiter
+    current_table = 2 #TODO: get current table
+    Table
+        .where(:id => current_table)
+        .update_all(:status => Table.statuses[:waiting])
+
+    redirect_to_back
+  end
+
 
   private
   def find_item
@@ -71,6 +81,13 @@ class WelcomeController < ApplicationController
 
   end
 
+  def redirect_to_back(error_message='')
+    if error_message.present?
+      flash[:warning] = error_message
+    end
+    redirect_to request.referer.blank? ? root_url : request.referer
+  end
+
   def verify_params!
     @cocktail_id = params[:id]
     unless @cocktail_id.blank?
@@ -80,5 +97,14 @@ class WelcomeController < ApplicationController
     end
   end
 
+  def sum_to_pay
+    @sum = Order.sum_to_pay
+
+  end
+
+  def get_current_table
+    current_table = 2 #TODO: get current table
+    @currrent_table = current_table
+  end
 
 end

@@ -44,7 +44,6 @@ class Admin::TablesController < Admin::SignedApplicationController
 
   def destroy
     @table.destroy
-    puts "ERRORS: #{@table.errors.inspect}"
     if @table.errors.empty?
       flash[:success] = "Cocktail \"#{@table.name}\" was removed successfully"
       redirect_to action: :index

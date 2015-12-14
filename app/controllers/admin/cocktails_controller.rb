@@ -81,7 +81,9 @@ class Admin::CocktailsController < Admin::SignedApplicationController
   end
 
   def redirect_to_back error_message
-    flash[:warning] = error_message
+    if error_message.present?
+      flash[:warning] = error_message
+    end
     redirect_to request.referer.blank? ? root_url : request.referer
   end
 

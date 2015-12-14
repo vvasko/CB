@@ -4,7 +4,7 @@ class Cocktail < ActiveRecord::Base
   has_many :products, through: :ingridients
 
   has_many :ordered_cocktails
-
+  has_many :orders, through: :ordered_cocktails
 
   before_save { self.name = name.titleize }
 

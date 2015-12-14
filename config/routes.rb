@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get 'search_by_product(/:product)' => 'welcome#index', as: :search_by_product
   get 'addtocart/:id' => 'welcome#add_to_cart', as: :add_to_cart
   get 'cart', to: 'cart#show'
+  get 'checkout', to: 'cart#checkout'
+  get 'call', to: 'welcome#call_waiter'
 
 
 

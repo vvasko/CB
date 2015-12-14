@@ -1,7 +1,7 @@
 <% if (cocktails.present?) %>
 <div class="body_panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title"><%= type.capitalize.pluralize %></h3>
+    <h3 class="panel-title"><%= type.capitalize.pluralize%></h3>
   </div>
   <div class="panel-body">
     <div class="row-eq-height">
@@ -28,7 +28,6 @@
                 </p>
 
                 <p><%= link_to 'Add To Cart', add_to_cart_path(cocktail.id), { :class=>"btn btn-primary", :role=>"button" } %>
-                  <a href="#" class="btn btn-primary" role="button">Add To Cart</a>
                   <a href="#" class="btn btn-default" role="button">Button</a></p>
               </div>
             </div>
