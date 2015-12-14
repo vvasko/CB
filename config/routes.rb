@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'welcome#index'
+  root 'selection_table#index'
+  # root 'welcome#index'
   resources :welcome, only: [:show]
   resources :ordered_cocktails, only: [:destroy]
   get 'cocktail/:id' => 'welcome#show', as: :purchase
@@ -75,6 +76,8 @@ Rails.application.routes.draw do
 
     match 'products/:name/:direction' => 'products#index',  via: 'get', as: :order_products
     match 'cocktails/:name/:direction' => 'cocktails#index', via: 'get', as: :order_cocktails
+
+    match 'waiters/:id/update_tables' => 'waiters#update_tables',  via: 'post', as: :update_waiter_tables
 
 
 

@@ -1,0 +1,26 @@
+// Place all the styles related to the selection_table controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.table_icon {
+  height: 200px;
+  width: 250px !important;
+  display: block;
+  text-align: center;
+  vertical-align: middle;
+  margin: 20px;
+  background: lightgoldenrodyellow url(dining.png) no-repeat;
+  background-size: 245px 250px;
+  font-size: 26px;
+  padding-top: 40px;
+  input {
+    height: 200px;
+    width: 250px;
+    color: black !important;
+    margin-top: -77px;
+    margin-left: -18px;
+    background-color: rgba(255, 255, 255, 0) !important;
+    border: none !important;
+
+  }
+}
