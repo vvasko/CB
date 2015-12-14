@@ -7,7 +7,7 @@ class Admin::WaitersController < Admin::SignedApplicationController
 
   def index
     @waiters = Waiter.all
-    @tables = Workset.where(status: :open).to_a.group_by { |item| item[:waiter_id] }
+    @tables = Workset.open.to_a.group_by { |item| item[:waiter_id] }
   end
 
   def new
