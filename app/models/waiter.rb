@@ -3,4 +3,9 @@ class Waiter < ActiveRecord::Base
 
   has_many :worksets
 
+  def fullname
+    "#{firstname} #{lastname}"
+  end
+
+
 end

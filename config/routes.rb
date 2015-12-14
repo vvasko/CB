@@ -89,7 +89,15 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :cocktails
+      resources :waiter
     end
+  end
+
+  namespace :employees do
+    root 'waiter_workspace#index'
+    resources :waiter_workspace, only: [:index]
+    get 'waiter_workspace/clear_table' => 'waiter_workspace#clear_table', as: :clear_table
+    get 'waiter_workspace/answer_alarm' => 'waiter_workspace#answer_alarm', as: :answer_alarm
+    get 'waiter_workspace/status_update' => 'waiter_workspace#status_update', as: :status_update
   end
 end
