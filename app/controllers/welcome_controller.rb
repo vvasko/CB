@@ -3,6 +3,7 @@ class WelcomeController < ApplicationController
 
   before_action :verify_params!, only: [:add_to_cart]
   before_action :sum_to_pay, only: [:index]
+  before_action :get_current_table, only: [:index]
 
   def index
     case
@@ -113,6 +114,11 @@ class WelcomeController < ApplicationController
 
     @sum
 
+  end
+
+  def get_current_table
+    current_table = 2 #TODO: get current table
+    @currrent_table = current_table
   end
 
 end
