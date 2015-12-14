@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'welcome#index'
+  root 'selection_table#index'
+  # root 'welcome#index'
   resources :welcome, only: [:show]
   get 'cocktail/:id' => 'welcome#show', as: :purchase
   get 'search_by_product(/:product)' => 'welcome#index', as: :search_by_product
@@ -64,7 +65,7 @@ Rails.application.routes.draw do
     match '/signout', to: 'sessions#destroy', via: 'delete'
     match '/signup', to: 'users#new', via: 'get'
 
-    resources :users, :products, :ingridients, :waiters
+    resources :users, :products, :ingridients, :waiters, :tables
 
     resources :cocktails do
       resources :ingridients

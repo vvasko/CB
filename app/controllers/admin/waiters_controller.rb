@@ -7,7 +7,7 @@ class Admin::WaitersController < Admin::SignedApplicationController
 
   def index
     @waiters = Waiter.all
-    @tables = Workset.where(status: 1).to_a.group_by { |item| item[:waiter_id] }
+    @tables = Workset.where(status: :open).to_a.group_by { |item| item[:waiter_id] }
   end
 
   def new
@@ -20,7 +20,7 @@ class Admin::WaitersController < Admin::SignedApplicationController
   end
 
   def show
-    worksets = Workset.where(status: 1).to_a
+    worksets = Workset.where(status: :open).to_a
     @tables_status = {}
 
     worksets.each do |item|
@@ -41,7 +41,7 @@ class Admin::WaitersController < Admin::SignedApplicationController
   end
 
   def destroy
-    @waiter.update_attribute :status, 1
+    @waiter.update_attribute :status, :fired
     if @waiter.errors.empty?
       flash[:success] = "Waiter #{@waiter.firstname.humanize} #{@waiter.lastname.humanize} was fired"
     else
@@ -85,11 +85,11 @@ class Admin::WaitersController < Admin::SignedApplicationController
   end
 
   def create_workset (table, waiter)
-    Workset.create(table_id: table, waiter_id: waiter, status: 1 )
+    Workset.create(table_id: table, waiter_id: waiter, status: :open )
   end
 
   def close_workset (id)
-    Workset.find(id).update_attributes(status: 0)
+    Workset.find(id).update_attributes(status: :closed)
   end
 
   def item_params
