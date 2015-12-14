@@ -1,4 +1,6 @@
 class WelcomeController < ApplicationController
+  include WelcomeHelper
+
   before_filter :find_item, only: [:show]
 
   before_action :verify_params!, only: [:add_to_cart]
@@ -103,8 +105,9 @@ class WelcomeController < ApplicationController
   end
 
   def get_current_table
-    current_table = 2 #TODO: get current table
-    @currrent_table = current_table
+    # current_table = 2 #TODO: get current table
+    current_table_id=(params[:table_id])
+    @currrent_table =  current_table_id
   end
 
 end

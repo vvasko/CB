@@ -10,7 +10,7 @@
           <h1>Sorry no available tables</h1>
       <% else %>
           <% @tables.each do |table| %>
-              <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 table_icon"><%= link_to table.id, {controller: 'welcome', action: 'index', table_id: table.id, method: 'get'} %></div>
+              <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 table_icon"><%= link_to table.id, {controller: 'welcome', action: 'index', table_id: table.id} %></div>
               <!--<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 table_icon"><%#= table.id %><%#= button_to '', welcome_path(table.id), method: :get %></div>-->
           <% end %>
       <% end %>
