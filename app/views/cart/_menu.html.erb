@@ -12,16 +12,22 @@
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <% if @cocktails['payed'].present? ||@cocktails['delivered'].present? %>
-            <li>
-              <%= link_to 'Table #'<<@currrent_table.to_s, root_path %>
-            </li>
-        <% else %>
-            <li>
-              <%= link_to 'Table #'<<@currrent_table.to_s, '#' %>
-            </li>
-        <% end %>
-        <li><%= link_to 'Call waiter', call_path %></li>
+        <li>
+          <% if @cocktails['payed'].present? ||@cocktails['delivered'].present? %>
+              <%= link_to root_path do %>
+                  <i class="glyphicon glyphicon-glass"><%= 'Table #'<<@currrent_table.to_s %></i>
+              <% end %>
+          <% else %>
+              <%= link_to '#' do %>
+                  <i class="glyphicon glyphicon-glass"><%= 'Table #'<<@currrent_table.to_s %></i>
+              <% end %>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to call_path do %>
+              <i class="glyphicon glyphicon-bell"></i>
+          <% end %>
+        </li>
       </ul>
 
     </div>
