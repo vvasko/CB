@@ -62,7 +62,7 @@ Rails.application.routes.draw do
     match '/signout', to: 'sessions#destroy', via: 'delete'
     match '/signup', to: 'users#new', via: 'get'
 
-    resources :users, :products, :ingridients, :waiters
+    resources :users, :products, :ingridients, :waiters, :worksets, :tables
 
     resources :cocktails do
       resources :ingridients
@@ -70,6 +70,8 @@ Rails.application.routes.draw do
 
     match 'products/:name/:direction' => 'products#index',  via: 'get', as: :order_products
     match 'cocktails/:name/:direction' => 'cocktails#index', via: 'get', as: :order_cocktails
+
+    match 'waiters/:id/update_tables' => 'waiters#update_tables',  via: 'post', as: :update_waiter_tables
 
 
 

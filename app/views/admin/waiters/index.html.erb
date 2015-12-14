@@ -1,10 +1,5 @@
 <div class="page-header">
   <h1><%= controller_name.humanize %>
-    <%# if @cocktails.empty? %>
-        <!--<small> have not been created yet</small>-->
-    <%# else %>
-        <!--<small><%= action_name %></small>-->
-    <%# end %>
     <div class="btn-group right" role="group">
       <%= link_to 'Add waiter', new_admin_waiter_path %>
     </div>
@@ -17,22 +12,19 @@
       <tr>
         <th>Id</th>
         <th>Name
-          <%#= get_sort_buttons(admin_order_cocktails_path(:name, 'asc'), admin_order_cocktails_path(:name, 'desc')) %>
         </th>
         <th>Last name</th>
         <th>Tables
-          <%#= get_sort_buttons(admin_order_cocktails_path(:price, 'asc'), admin_order_cocktails_path(:price, 'desc')) %>
         </th>
         <th>Actions</th>
-        <!--<th></th>-->
       </tr>
       <% @waiters.each do |waiter| %>
+          <% tables_count = @tables[waiter.id].nil? ? 0 : @tables[waiter.id].size %>
           <tr>
             <td><%= waiter.id %></td>
-            <!--<td><%#= link_to cocktail.name, admin_cocktail_path(cocktail) %></td>-->
             <td><%= waiter.firstname %></td>
             <td><%= waiter.lastname %></td>
-            <td><%= link_to @worksets.count, admin_waiter_path(waiter)%></td>
+            <td><%= link_to tables_count, admin_waiter_path(waiter)%></td>
             <td>
               <div class="btn-group" role="group">
                 <%= link_to 'edit', edit_admin_waiter_path(waiter) %>
@@ -45,5 +37,6 @@
   </div>
 </div>
 <div class="body_panel panel-default">
+  <%#= debug params %>
   <%#= draw_pagination @items_count, @per_page %>
 </div>

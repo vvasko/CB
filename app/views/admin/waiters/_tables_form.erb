@@ -1,18 +1,16 @@
 <div class="body_panel panel-default">
+
+
   <div class="panel-body">
-    <table class="table table-hover">
-      <tr>
-        <th>Id</th>
-        <th>Table name</th>
-        <th>Action</th>
-      </tr>
-      <% @tables.each do |table| %>
-          <tr>
-            <td><%= table.id %></td>
-            <td><%= table.name %></td>
-            <td><%= check_box_tag :fit %></td>
-          </tr>
-      <% end %>
-    </table>
+    <%= label_tag(f, :id) %>
+  </div>
+
+  <div class='field form-group'>
+  </div>
+
+  <div class="actions form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= button_to "Save"%>
+    </div>
   </div>
 </div>
