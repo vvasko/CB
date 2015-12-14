@@ -1,7 +1,7 @@
 class Admin::AdminApplicationController < ApplicationController
   include Admin::SessionsHelper
   layout 'application_admin'
-  PAGINATION_PER_PAGE = 3
+  PAGINATION_PER_PAGE = 5
 
   def paginate collection, page, per_page
     current_page = self.get_validated_page(page.to_i)
