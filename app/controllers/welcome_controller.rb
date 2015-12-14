@@ -109,7 +109,7 @@ class WelcomeController < ApplicationController
     # current_table = 2 #TODO: get current table
     # @currrent_table = current_table
     current_table_id= 4
-    @currrent_table = current_table_id
-    puts "currrent_table = #{@currrent_table}"
+    @current_table = current_table_id
+    puts "currrent_table = #{@current_table}"
    end
 end
