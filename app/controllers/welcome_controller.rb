@@ -1,4 +1,5 @@
 class WelcomeController < ApplicationController
+  include WelcomeHelper
 
   before_filter :find_item, only: [:show]
 
@@ -111,5 +112,4 @@ class WelcomeController < ApplicationController
     @currrent_table = current_table_id
     puts "currrent_table = #{@currrent_table}"
    end
-
 end
