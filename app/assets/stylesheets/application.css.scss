@@ -133,3 +133,19 @@ form {
   border-right: 5px solid transparent;
   border-top: 5px solid black;
 }
+
+.status-free {
+  @extend .label-success;
+}
+
+.status-occupied {
+  @extend .label-danger;
+}
+
+.status-inactive {
+  @extend .label-default;
+}
+
+.status-waiting {
+  @extend .label-info;
+}

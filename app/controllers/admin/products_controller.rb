@@ -6,10 +6,10 @@ class Admin::ProductsController < Admin::SignedApplicationController
     @products = Product.all
     @products_count = @products.size
     @per_page = PAGINATION_PER_PAGE
-    @products = paginate(@products, params[:page], @per_page)
     if params[:name].present?
       @products = @products.order("#{params[:name]} #{params[:direction]}")
     end
+    @products = paginate(@products, params[:page], @per_page)
   end
 
   def new
@@ -23,7 +23,6 @@ class Admin::ProductsController < Admin::SignedApplicationController
 
   def item_params
     params.require(:product).permit(:id, :name, :image, :remove_image, :cost_price, :min_value, :product_type)
-
   end
 
   def edit
