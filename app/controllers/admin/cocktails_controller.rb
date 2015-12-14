@@ -11,18 +11,16 @@ class Admin::CocktailsController < Admin::SignedApplicationController
     @cocktails = Cocktail.all_with_includes
     @items_count = @cocktails.size
     @per_page = PAGINATION_PER_PAGE
+
     if params[:name].present?
       if 'price' == params[:name]
-        @cocktails = paginate(@cocktails, params[:page], @per_page)
         @cocktails = @cocktails.sort_by{ |a| a.price } if 'asc' == params[:direction]
         @cocktails = @cocktails.sort_by{ |a| -a.price } if 'desc' == params[:direction]
       else
         @cocktails = @cocktails.order("#{params[:name]} #{params[:direction]}")
-        @cocktails = paginate(@cocktails, params[:page], @per_page)
       end
-    else
-      @cocktails = paginate(@cocktails, params[:page], @per_page)
     end
+    @cocktails = paginate(@cocktails, params[:page], @per_page)
   end
 
   def new
@@ -80,7 +78,6 @@ class Admin::CocktailsController < Admin::SignedApplicationController
   private
   def find_item
     @cocktail= Cocktail.find_with_includes params[:id]
-
   end
 
   def redirect_to_back error_message
@@ -104,7 +101,7 @@ class Admin::CocktailsController < Admin::SignedApplicationController
   end
 
   def before_new
-    @cocktail =Cocktail.new
+    @cocktail = Cocktail.new
     product_id = params[:product]
 
     if validate_product_id? product_id

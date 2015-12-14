@@ -5,7 +5,11 @@ class Admin::AdminApplicationController < ApplicationController
 
   def paginate collection, page, per_page
     current_page = self.get_validated_page(page.to_i)
-    collection.limit(per_page).offset(current_page * per_page)
+    if collection.kind_of? Array
+      collection.slice!(current_page * per_page, per_page) #TODO: CHANGE THIS
+    else
+      collection.limit(per_page).offset(current_page * per_page)
+    end
   end
 
   protected

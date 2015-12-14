@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   resources :welcome, only: [:show]
   get 'cocktail/:id' => 'welcome#show', as: :purchase
   get 'search_by_product(/:product)' => 'welcome#index', as: :search_by_product
+  get 'addtocart/:id' => 'welcome#add_to_cart', as: :add_to_cart
+  get 'cart', to: 'cart#show'
 
 
 
@@ -62,7 +64,7 @@ Rails.application.routes.draw do
     match '/signout', to: 'sessions#destroy', via: 'delete'
     match '/signup', to: 'users#new', via: 'get'
 
-    resources :users, :products, :ingridients, :waiters, :worksets, :tables
+    resources :users, :products, :ingridients, :waiters
 
     resources :cocktails do
       resources :ingridients
