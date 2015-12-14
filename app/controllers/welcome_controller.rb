@@ -101,7 +101,7 @@ class WelcomeController < ApplicationController
 
   def sum_to_pay
     @sum = Order.sum_to_pay
-
+   
   end
 
   def get_current_table
