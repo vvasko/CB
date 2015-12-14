@@ -2,7 +2,7 @@ class WelcomeController < ApplicationController
   before_filter :find_item, only: [:show]
 
   before_action :verify_params!, only: [:add_to_cart]
-  before_action :sum_to_pay, only: [:index]
+  before_action :sum_to_pay, only: [:index,:show]
   before_action :get_current_table, only: [:index]
 
   def index
