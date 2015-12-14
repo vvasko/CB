@@ -13,6 +13,7 @@
  *= require_tree .
  *= require_self
  */
+@import "bootstrap-sprockets";
 @import "bootstrap";
 
 input[type = submit] {
@@ -133,3 +134,4 @@ form {
   border-right: 5px solid transparent;
   border-top: 5px solid black;
 }
+
