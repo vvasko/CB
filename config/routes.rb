@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   root 'selection_table#index'
   # root 'welcome#index'
   resources :welcome, only: [:show]
+  resources :ordered_cocktails, only: [:destroy]
   get 'cocktail/:id' => 'welcome#show', as: :purchase
   get 'search_by_product(/:product)' => 'welcome#index', as: :search_by_product
   get 'addtocart/:id' => 'welcome#add_to_cart', as: :add_to_cart
