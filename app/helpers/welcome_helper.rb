@@ -1,7 +1,6 @@
 module WelcomeHelper
 
   def set_current_table_id(table_id)
-    puts "WelcomeHelper"
     cookies.permanent[:table_id] = table_id
   end
 
