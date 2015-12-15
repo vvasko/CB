@@ -9,7 +9,6 @@ class WelcomeController < ApplicationController
   before_action :get_current_table, only: [:index]
 
   def index
-    puts "welcome controller"
     case
       when params.has_key?(:search)
         search_by_phrase
@@ -107,11 +106,8 @@ class WelcomeController < ApplicationController
   end
 
   def get_current_table
-    # current_table = 2 #TODO: get current table
-    # @currrent_table = current_table
     current_table_id= 4
     @current_table = current_table_id
     puts "currrent_table = #{@current_table}"
-   end
-
+  end
 end

@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'selection_table#index'
   # root 'welcome#index'
-  resources :welcome
+  resources :welcome, only: [:show, :index]
+  resources :selection_table, only: [:show, :select]
   resources :ordered_cocktails, only: [:destroy]
   get 'cocktail/:id' => 'welcome#show', as: :purchase
   get 'search_by_product(/:product)' => 'welcome#index', as: :search_by_product
@@ -13,6 +14,7 @@ Rails.application.routes.draw do
   get 'cart', to: 'cart#show'
   get 'checkout', to: 'cart#checkout'
   get 'call', to: 'welcome#call_waiter'
+  get 'select_table/:id' => 'selection_table#select', as: :select_table
 
 
 
