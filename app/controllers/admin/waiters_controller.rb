@@ -20,17 +20,17 @@ class Admin::WaitersController < Admin::SignedApplicationController
   end
 
   def show
-    worksets = Workset.where(status: :open).to_a
-    @tables_status = {}
-
-    worksets.each do |item|
-      if item[:waiter_id] != params[:id].to_i
-        @tables_status[item[:table_id]] = 'busy'
-      elsif item[:waiter_id] == params[:id].to_i
-        @tables_status[item[:table_id]] = 'fixed'
-      end
-    end
-
+    # worksets = Workset.open.to_a
+    # @tables_status = {}
+    #
+    # worksets.each do |item|
+    #   if item[:waiter_id] != params[:id].to_i
+    #     @tables_status[item[:table_id]] = 'busy'
+    #   elsif item[:waiter_id] == params[:id].to_i
+    #     @tables_status[item[:table_id]] = 'fixed'
+    #   end
+    # end
+    @tables_status = waiter_tables_status(@waiter.id.to_i)
     @tables = Table.all
     # @tables = Table.where(status: ???)
 
@@ -41,8 +41,14 @@ class Admin::WaitersController < Admin::SignedApplicationController
   end
 
   def destroy
-    @waiter.update_attribute :status, :fired
+    worksets = Workset.where(waiter_id: @waiter.id, status: 0)
+
+    unless worksets.empty?
+        @waiter.errors.add(:tables, 'must be released before firing waiter')
+    end
+
     if @waiter.errors.empty?
+        @waiter.update_attribute :status, :fired
       flash[:success] = "Waiter #{@waiter.firstname.humanize} #{@waiter.lastname.humanize} was fired"
     else
       flash[:warning] = @waiter.errors.full_messages.to_sentence
@@ -63,7 +69,7 @@ class Admin::WaitersController < Admin::SignedApplicationController
 
   def update_tables
     tables = params[:tables]
-    worksets = Workset.where(waiter_id: @waiter.id, status: 1).to_a
+    worksets = Workset.where(waiter_id: @waiter.id, status: 0).to_a
 
     unless tables.nil?
       tables.each do |table|
@@ -85,11 +91,28 @@ class Admin::WaitersController < Admin::SignedApplicationController
   end
 
   def create_workset (table, waiter)
-    Workset.create(table_id: table, waiter_id: waiter, status: :open )
+    Workset.create(table_id: table, waiter_id: waiter, status: 0)
   end
 
   def close_workset (id)
-    Workset.find(id).update_attributes(status: :closed)
+    Workset.find(id).update_attributes(status: 1)
+  end
+
+  def waiter_tables_status waiter_id
+
+    worksets = Workset.open.to_a
+    @result = {}
+
+    worksets.each do |item|
+      if item[:waiter_id] != waiter_id
+        @result[item[:table_id]] = 'busy'
+      elsif item[:waiter_id] == waiter_id
+        @result[item[:table_id]] = 'fixed'
+      end
+    end
+
+    @result
+
   end
 
   def item_params
