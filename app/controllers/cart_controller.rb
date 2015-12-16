@@ -13,7 +13,6 @@ class CartController < ApplicationController
          .includes(ordered_cocktails: [:order])
          .where("`orders`.status = ? AND `orders`.table_id = ?", Order.statuses[:pending], @current_table).all_with_includes
 
-    # .select("*,ordered_cocktails.id as ordered_cocktail_id")
 
     @cocktails[:payed] =
       Cocktail

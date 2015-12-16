@@ -6,7 +6,7 @@ class WelcomeController < ApplicationController
 
   before_action :verify_params!, only: [:add_to_cart]
   before_action :sum_to_pay, only: [:index,:show]
-  before_action :get_current_table, only: [:index]
+  before_action :get_current_table, only: [:index,:call_waiter, :add_to_cart]
 
   def index
     case
@@ -25,12 +25,11 @@ class WelcomeController < ApplicationController
 
   def add_to_cart
     #check cocktail exists (verify_params)
-    Order.add_cocktail_to_order @cocktail_id
+    Order.add_cocktail_to_order @cocktail_id, @current_table
     redirect_to action: 'index'
   end
 
   def call_waiter
-    current_table = 2 #TODO: get current table
     Table
         .where(:id => current_table)
         .update_all(:status => Table.statuses[:waiting])
@@ -101,13 +100,10 @@ class WelcomeController < ApplicationController
   end
 
   def sum_to_pay
-    @sum = Order.sum_to_pay
-   
+    @sum = Order.sum_to_pay get_current_table
   end
 
   def get_current_table
-    current_table_id= 4
-    @current_table = current_table_id
-    puts "currrent_table = #{@current_table}"
+    @current_table = get_current_table_id
   end
 end

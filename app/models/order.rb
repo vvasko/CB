@@ -16,7 +16,6 @@ class Order < ActiveRecord::Base
     order = Order.find_or_create_by(:status => Order.statuses[:pending], :table_id => current_table)
     OrderedCocktail.create(order_id: order.id, cocktail_id: cocktail_id)
 
-    p current_table
 
   end
 
