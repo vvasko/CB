@@ -60,7 +60,7 @@ module Employees::WaiterWorkspaceHelper
       table vacant
       </div>"
     else
-      if grouped_orders_count[[table.id, Order.statuses[:waiting_for_payment]]].blank? && grouped_orders_count[[table.id, Order.statuses[:delivered]]].blank? && table.occupied?
+      if grouped_orders_count[[table.id, Order.statuses[:pending]]].blank? && grouped_orders_count[[table.id, Order.statuses[:waiting_for_payment]]].blank? && grouped_orders_count[[table.id, Order.statuses[:delivered]]].blank? && table.occupied?
         "<div class = 'btn btn-success'> <span class='glyphicon glyphicon-thumbs-up'> </span>
       #{link_to "clear table", employees_clear_table_path(:id => table.id), style: "color:inherit"}
         </div>"

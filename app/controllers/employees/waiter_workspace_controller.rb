@@ -18,7 +18,7 @@ class Employees::WaiterWorkspaceController < Employees::EmployeesApplicationCont
 
   def clear_table
     workset = Workset.find_open(params[:id])
-    if workset.orders.pending.waiting_for_payment.blank?
+    if workset.orders.pending.blank? && workset.orders.waiting_for_payment.blank?
       update_status(Table, params[:id], Table.statuses[:free])
       order_status_shift(params[:id], Order.statuses[:closed])
       payout(workset)
