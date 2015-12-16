@@ -1,25 +1,26 @@
 class Order < ActiveRecord::Base
 
+  include WelcomeHelper
+
   has_many :ordered_cocktails
   has_many :cocktails, through: :ordered_cocktails
   belongs_to :table
 
   scope :uncleared, -> {where("status IN (#{Table.statuses[:free]},#{Table.statuses[:waiting]}) ")}
 
-  enum status: [ :pending, :delivered, :payed, :closed] #rails wasn't all that trilled about :new, with it being default action, and stuff. So I changed it to :pending
+  enum status: [ :pending, :waiting_for_payment, :delivered, :payed, :closed]
 
 
-  def self.add_cocktail_to_order cocktail_id
+  def self.add_cocktail_to_order cocktail_id, current_table
 
-    current_table = 2 #TODO: get current table
     order = Order.find_or_create_by(:status => Order.statuses[:pending], :table_id => current_table)
-
     OrderedCocktail.create(order_id: order.id, cocktail_id: cocktail_id)
+
+    p current_table
 
   end
 
-  def self.sum_to_pay
-    current_table = 2 #TODO: get current table
+  def self.sum_to_pay current_table
     sum = 0
 
     cocktails =
@@ -36,9 +37,6 @@ class Order < ActiveRecord::Base
     sum
 
   end
-
-
-
 
 
 end
