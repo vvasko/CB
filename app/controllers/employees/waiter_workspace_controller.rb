@@ -18,7 +18,7 @@ class Employees::WaiterWorkspaceController < Employees::EmployeesApplicationCont
 
   def clear_table
     workset = Workset.find_open(params[:id])
-    if workset.orders.pending.blank?
+    if workset.orders.pending.waiting_for_payment.blank?
       update_status(Table, params[:id], Table.statuses[:free])
       order_status_shift(params[:id], Order.statuses[:closed])
       payout(workset)
@@ -42,7 +42,7 @@ class Employees::WaiterWorkspaceController < Employees::EmployeesApplicationCont
   private
 
   def order_status_shift(table_id, status)
-    about_to_be_updated =Order.where(table_id: table_id).where(status: required_status(status)) unless status.to_i>3
+    about_to_be_updated =Order.where(table_id: table_id).where(status: required_status(status)) unless status.to_i>4
     about_to_be_updated.update_all(status: status) unless about_to_be_updated.blank?
 
   end
