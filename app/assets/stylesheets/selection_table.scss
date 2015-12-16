@@ -2,32 +2,38 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.table_icon {
-  height: 200px;
-  width: 250px !important;
-  display: block;
-  text-align: center;
-  vertical-align: middle;
-  margin: 20px;
-  background: lightgoldenrodyellow url(dining.png) no-repeat;
-  background-size: 245px 250px;
-  font-size: 26px;
-  padding-top: 40px;
-  a {
-    display: table;
+.table_icon_wrapp {
+  padding: 10px;
+  .table_icon {
+    background: lightgoldenrodyellow;
     height: 200px;
-    width: 250px;
-    color: black !important;
-    margin-top: -40px;
-    margin-left: -16px;
     position: relative;
-    padding-top: 40px;
-    text-decoration: none;
-    //background-color: rgba(255, 255, 255, 0) !important;
-    //border: none !important;
-
+    &:before {
+      content: '';
+      display: block;
+      height: 120px;
+      width: 100%;
+      background: url(dining.png) no-repeat;
+      background-size: 245px 250px;
+      background-position: center;
+      position: absolute;
+      bottom: 10px;
+    }
+  }
+  .table_name {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    left: 0;
+    margin: auto;
+    width: 30px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: black;
   }
 }
+
 .table_icon:hover {
     background-color: lightgreen;
   }
