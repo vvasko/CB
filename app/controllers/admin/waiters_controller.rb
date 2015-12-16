@@ -4,7 +4,6 @@ class Admin::WaitersController < Admin::SignedApplicationController
 
   before_filter :find_item, only: [:edit, :update, :destroy, :show, :update_tables]
 
-
   def index
     @waiters = Waiter.hired
     @tables = Workset.open.to_a.group_by { |item| item[:waiter_id] }
@@ -116,7 +115,7 @@ class Admin::WaitersController < Admin::SignedApplicationController
   end
 
   def item_params
-    params.require(:waiter).permit(:id, :firstname, :lastname, :photo, :status)
+    params.require(:waiter).permit(:id, :firstname, :lastname, :photo, :remove_photo, :status)
   end
 
   private
