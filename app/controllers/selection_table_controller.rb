@@ -3,6 +3,12 @@ class SelectionTableController < ApplicationController
 
   def index
     @tables = Table.all
+    @current_table = get_current_table_id
+    if @current_table.present?
+      Table
+          .where(:id => @current_table)
+          .update_all(:status => Table.statuses[:free])
+    end
   end
 
   def select
