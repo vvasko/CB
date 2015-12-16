@@ -7,7 +7,7 @@ module Employees::WaiterWorkspaceHelper
   def order_table_content_group(table, count_order_states, order_sums)
     " <td class='text-center'> #{table.name} </td>
                 <td class='text-center'> #{alarm_button(table)} </td>
-                <td class='text-center'>#{delivery_button(table.id, count_order_states[[table.id, Order.statuses[:pending]]].to_i)} </td>
+                <td class='text-center'>#{delivery_button(table.id, count_order_states[[table.id, Order.statuses[:waiting_for_payment]]].to_i)} </td>
                 <td class='text-center'> #{payment_button(table.id, count_order_states)} </td>
                 <td class='text-center'> #{clear_table_button(table, count_order_states)}</td>
                 <td class='text-center'> #{sum_field(waiters_share_sum(order_sums[table.id]))}  </td>".html_safe
@@ -42,7 +42,7 @@ module Employees::WaiterWorkspaceHelper
   end
 
   def payment_button(table_id, orders)
-    unpayed_orders = orders[[table_id, Order.statuses[:pending]]].to_i+orders[[table_id, Order.statuses[:delivered]]].to_i
+    unpayed_orders = orders[[table_id, Order.statuses[:waiting_for_payment]]].to_i+orders[[table_id, Order.statuses[:delivered]]].to_i
     if unpayed_orders > 0
       "<div class = 'btn btn-warning'> <span class='glyphicon glyphicon-usd'> </span> <span class = 'badge'>#{unpayed_orders} </span>
     #{link_to "unpayed", employees_status_update_path(:table_id => table_id, :status => Order.statuses[:payed]), style: "color:inherit"}
@@ -60,7 +60,7 @@ module Employees::WaiterWorkspaceHelper
       table vacant
       </div>"
     else
-      if grouped_orders_count[[table.id, Order.statuses[:pending]]].blank? && grouped_orders_count[[table.id, Order.statuses[:delivered]]].blank? && table.occupied?
+      if grouped_orders_count[[table.id, Order.statuses[:waiting_for_payment]]].blank? && grouped_orders_count[[table.id, Order.statuses[:delivered]]].blank? && table.occupied?
         "<div class = 'btn btn-success'> <span class='glyphicon glyphicon-thumbs-up'> </span>
       #{link_to "clear table", employees_clear_table_path(:id => table.id), style: "color:inherit"}
         </div>"
