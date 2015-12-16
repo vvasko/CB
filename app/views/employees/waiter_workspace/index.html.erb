@@ -1,42 +1,40 @@
-<% if @waiter%>
-    <%puts "================waiter tables check query=============="%>
-<% unless @worksets.blank? %>
-    <%puts "============= end of waiter tables check query================"%>
-    <div class="page-header">
-       <h1>Your tables:</h1>
-    </div>
+<% if @waiter %>
 
-    <div class="body_panel panel-default">
-      <div class="table-responsive">
-        <table class="table table-bordered">
-          <tr>
-            <th class="text-center" >Name</th>
-            <th class="text-center" >Alarm status</th>
-            <th class="text-center" >Delivery status</th>
-            <th class="text-center" >Payment status</th>
-            <th class="text-center" >Clear table</th>
-            <th class="text-center" >Your cut</th>
-          </tr>
+    <% unless @worksets.blank? %>
 
-          <% @worksets.each do |workset| %>
-              <% puts "======================workset number:#{workset.id}=================" %>
+        <div class="page-header">
+          <h1>Your tables:</h1>
+        </div>
+
+        <div class="body_panel panel-default">
+          <div class="table-responsive">
+            <table class="table table-bordered">
               <tr>
-                <%= order_table_content_group(workset.table, workset.count_order_states, workset.carrot_on_a_stick)%>
-
+                <th class="text-center">Name</th>
+                <th class="text-center">Alarm status</th>
+                <th class="text-center">Delivery status</th>
+                <th class="text-center">Payment status</th>
+                <th class="text-center">Clear table</th>
+                <th class="text-center">Your cut</th>
               </tr>
-          <% end %>
-        </table>
-      </div>
-    </div>
 
-<%else%>
-    <div class="page-header">
-      <h1>Oops, looks like you have no table assigned yet. Ask administrator for details</h1>
-    </div>
+              <% @worksets.each do |workset| %>
+                  <tr>
+                    <%= order_table_content_group(workset.table, @worksets_count, @worksets_sum) %>
+                  </tr>
+              <% end %>
+            </table>
+          </div>
+        </div>
 
-<% end %>
+    <% else %>
+        <div class="page-header">
+          <h1>Oops, looks like you have no table assigned yet. Ask administrator for details</h1>
+        </div>
 
-<%else%>
+    <% end %>
+
+<% else %>
     <div class="page-header">
       <h1>Select yourself from dropdown up above, please</h1>
     </div>

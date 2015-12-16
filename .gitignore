@@ -17,3 +17,4 @@
 /tmp
 .idea
 
+app/views/employees/waiter_workspace/index_backup.html.erb
