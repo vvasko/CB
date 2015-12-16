@@ -18,7 +18,7 @@ class CartController < ApplicationController
       Cocktail
         .joins(:orders)
         .includes(ordered_cocktails: [:order])
-        .where("`orders`.status in(#{Order.statuses[:payed]}, #{Order.statuses[:delivered]}) AND `orders`.table_id = ?",  @current_table).all_with_includes
+        .where("`orders`.status in(#{Order.statuses[:payed]}, #{Order.statuses[:delivered]}, #{Order.statuses[:waiting_for_payment]}) AND `orders`.table_id = ?",  @current_table).all_with_includes
 
     @cocktails
 
@@ -27,7 +27,7 @@ class CartController < ApplicationController
   def checkout
     Order
         .where(:table_id => @current_table, :status => Order.statuses[:pending])
-        .update_all(:status => Order.statuses[:payed], :sum => Order.sum_to_pay)
+        .update_all(:status => Order.statuses[:waiting_for_payment], :sum => Order.sum_to_pay @current_table )
 
     redirect_to action: 'show'
   end
