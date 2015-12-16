@@ -31,3 +31,7 @@
 .table_icon:hover {
     background-color: lightgreen;
   }
+
+.table_icon.table_disabled{
+  background-color: lightgray !important;
+}
