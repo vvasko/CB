@@ -8,7 +8,7 @@
     background: lightgoldenrodyellow;
     height: 200px;
     position: relative;
-    &:before {
+    &:after {
       content: '';
       display: block;
       height: 120px;
@@ -16,21 +16,16 @@
       background: url(dining.png) no-repeat;
       background-size: 245px 250px;
       background-position: center;
-      position: absolute;
-      bottom: 10px;
     }
   }
   .table_name {
-    position: absolute;
-    top: 50px;
-    right: 0;
-    left: 0;
-    margin: auto;
-    width: 30px;
+    padding: 20px 10px;
+    vertical-align: middle;
     text-align: center;
     font-size: 16px;
     font-weight: bold;
     color: black;
+    width: 100%;
   }
 }
 
