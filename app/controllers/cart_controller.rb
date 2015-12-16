@@ -27,7 +27,7 @@ class CartController < ApplicationController
   def checkout
     Order
         .where(:table_id => @current_table, :status => Order.statuses[:pending])
-        .update_all(:status => Order.statuses[:waiting_for_payment], :sum => Order.sum_to_pay @current_table )
+        .update_all(:status => Order.statuses[:waiting_for_payment], :sum => Order.sum_to_pay(@current_table) )
 
     redirect_to action: 'show'
   end
