@@ -17,7 +17,12 @@ class Workset < ActiveRecord::Base
   end
 
   def self.active_orders_sum(id)
-    self.joins(:table,:orders).where(waiter_id: id).open.where("orders.status IN (#{Order.statuses[:waiting_for_payment]},#{Order.statuses[:delivered]},#{Order.statuses[:payed]}) ").group('worksets.table_id').sum(:sum)
+    self.joins(:table,:orders)
+        .where(waiter_id: id)
+        .open
+        .where("orders.status IN (#{Order.statuses[:waiting_for_payment]},#{Order.statuses[:delivered]},#{Order.statuses[:payed]}) ")
+        .group('worksets.table_id'
+        ).sum(:sum)
   end
 
   def self.orders_count(id)

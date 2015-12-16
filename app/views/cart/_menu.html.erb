@@ -15,11 +15,11 @@
         <li>
           <% if @cocktails['payed'].present? ||@cocktails['delivered'].present? %>
               <%= link_to root_path do %>
-                  <i class="glyphicon glyphicon-glass"><%= 'Table #'<<@current_table.to_s %></i>
+                  <i class="glyphicon glyphicon-glass"><%= 'Table '<<@table_name %></i>
               <% end %>
           <% else %>
               <%= link_to '#' do %>
-                  <i class="glyphicon glyphicon-glass"><%= 'Table #'<<@current_table.to_s %></i>
+                  <i class="glyphicon glyphicon-glass"><%= 'Table '<<@table_name %></i>
               <% end %>
           <% end %>
         </li>

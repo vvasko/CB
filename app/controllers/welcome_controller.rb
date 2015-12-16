@@ -8,6 +8,8 @@ class WelcomeController < ApplicationController
   before_action :sum_to_pay, only: [:index,:show]
   before_action :get_current_table, only: [:index,:call_waiter, :add_to_cart]
 
+  after_action :get_table_name, only: [:index]
+
   def index
     case
       when params.has_key?(:search)
@@ -17,6 +19,7 @@ class WelcomeController < ApplicationController
       else
         show_default
     end
+    get_table_name
   end
 
   def show
@@ -36,6 +39,7 @@ class WelcomeController < ApplicationController
 
     redirect_to_back
   end
+
 
 
   private
@@ -105,5 +109,11 @@ class WelcomeController < ApplicationController
 
   def get_current_table
     @current_table = get_current_table_id
+
   end
+
+  def get_table_name
+    @table_name = Table.find(@current_table).name
+  end
+
 end

@@ -2,7 +2,7 @@ class CartController < ApplicationController
 
   include WelcomeHelper
 
-  before_action :get_current_table, only: [:show, :checkout]
+  before_action :get_current_table, :get_table_name, only: [:show, :checkout]
 
   def show
     @cocktails = {}
@@ -36,6 +36,10 @@ class CartController < ApplicationController
   private
   def get_current_table
     @current_table = get_current_table_id
+  end
+
+  def get_table_name
+    @table_name = Table.find(@current_table).name
   end
 
 end
