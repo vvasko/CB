@@ -13,4 +13,10 @@ class Table < ActiveRecord::Base
       return false
     end
   end
+
+  def self.set_status id , status
+    Table
+        .where(:id => id)
+        .update_all(:status => status)
+  end
 end
