@@ -18,7 +18,8 @@ class CartController < ApplicationController
       Cocktail
         .joins(:orders)
         .includes(ordered_cocktails: [:order])
-        .where("`orders`.status in(#{Order.statuses[:payed]}, #{Order.statuses[:delivered]}, #{Order.statuses[:waiting_for_payment]}) AND `orders`.table_id = ?",  @current_table).all_with_includes
+        .where("`orders`.status in(#{Order.statuses[:payed]}, #{Order.statuses[:delivered]}, #{Order.statuses[:waiting_for_payment]}) AND `orders`.table_id = ?",  @current_table)
+        .all_with_includes
 
     @cocktails
 

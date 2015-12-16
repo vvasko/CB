@@ -31,7 +31,7 @@ class WelcomeController < ApplicationController
 
   def call_waiter
     Table
-        .where(:id => current_table)
+        .where(:id => @current_table)
         .update_all(:status => Table.statuses[:waiting])
 
     redirect_to_back
