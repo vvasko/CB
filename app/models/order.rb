@@ -4,7 +4,7 @@ class Order < ActiveRecord::Base
   has_many :cocktails, through: :ordered_cocktails
   belongs_to :table
 
-  scope :uncleared, -> {where("status < 3 ")}
+  scope :uncleared, -> {where("status IN (#{Table.statuses[:free]},#{Table.statuses[:waiting]}) ")}
 
   enum status: [ :pending, :delivered, :payed, :closed] #rails wasn't all that trilled about :new, with it being default action, and stuff. So I changed it to :pending
 

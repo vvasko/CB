@@ -5,15 +5,27 @@ class Workset < ActiveRecord::Base
 
   enum status: [ :open, :closed]
 
+  @@waiters_share = 0.05
 
-  @@waiters_share = 0.05 # probably should be adjustable, and thus a part of waiter model/table instead, but oh well
-
-  def carrot_on_a_stick(query = '<')
-    table.orders.where("status #{query} ?",3).sum(:sum)*@@waiters_share
+  def carrot_on_a_stick
+    table.orders.closed.sum(:sum)*@@waiters_share
   end
 
-
-  def count_order_states
-    table.orders.group(:status).count
+  def self.select_with_table(id)
+    self.includes(:table).where(waiter_id: id).open
+    # Workset.joins(:orders).includes(table:[:orders]).where(waiter_id: id).open.distinct
   end
+
+  def self.active_orders_sum(id)
+    self.joins(:table,:orders).where(waiter_id: id).open.where("orders.status IN (#{Order.statuses[:pending]},#{Order.statuses[:delivered]},#{Order.statuses[:payed]}) ").group('worksets.table_id').sum(:sum)
+  end
+
+  def self.orders_count(id)
+    self.joins(:table,:orders).where(waiter_id: id).open.group('worksets.table_id','orders.status').count
+  end
+
+  def self.find_open(table_id)
+    self.find_by(table_id: table_id,status: 'open')
+  end
+
 end

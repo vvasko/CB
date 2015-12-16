@@ -8,5 +8,8 @@ class Waiter < ActiveRecord::Base
     "#{firstname} #{lastname}"
   end
 
+  def waiters_share
+    0.05
+  end
 
 end

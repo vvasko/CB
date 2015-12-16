@@ -8,10 +8,6 @@ class Employees::EmployeesApplicationController < ApplicationController
     collection.limit(per_page).offset(current_page * per_page)
   end
 
-  def deliver orders
-
-  end
-
   protected
   def get_validated_page page
     page > 0 ? page - 1 : 0
