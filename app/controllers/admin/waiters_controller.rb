@@ -19,20 +19,8 @@ class Admin::WaitersController < Admin::SignedApplicationController
   end
 
   def show
-    # worksets = Workset.open.to_a
-    # @tables_status = {}
-    #
-    # worksets.each do |item|
-    #   if item[:waiter_id] != params[:id].to_i
-    #     @tables_status[item[:table_id]] = 'busy'
-    #   elsif item[:waiter_id] == params[:id].to_i
-    #     @tables_status[item[:table_id]] = 'fixed'
-    #   end
-    # end
     @tables_status = waiter_tables_status(@waiter.id.to_i)
-    @tables = Table.all
-    # @tables = Table.where(status: ???)
-
+    @tables = Table.free
   end
 
   def edit
