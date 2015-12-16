@@ -18,3 +18,4 @@
 .idea
 
 app/views/employees/waiter_workspace/index_backup.html.erb
+public/uploads/waiter/photo/
