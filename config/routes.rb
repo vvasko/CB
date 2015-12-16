@@ -4,7 +4,6 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'selection_table#index'
-  # root 'welcome#index'
   resources :welcome, only: [:show, :index]
   resources :selection_table, only: [:show, :select]
   resources :ordered_cocktails, only: [:destroy]
